@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { loginBtnStyle } from '../../components/LoginButton/LoginButton';
-import { useDispatch, useSelector } from 'react-redux';
-import { connect, ConnectedProps } from 'react-redux'
-import { login } from './../../actions/user.actions';
+import { useDispatch } from 'react-redux';
+import { login } from '../../actions/user.actions';
 
 
-const Login = () => {
+const Login: React.FC = () => {
     const [inputs, setForm] = useState({
         username: '',
         password: '',

@@ -16,6 +16,9 @@ export const signup = (signupReq: SignUpRequest): any => {
 
 export const loginAsync = (loginReq: LoginRequest): any => {
     return axios.post(`${base_url}/auth/login`, loginReq)
+      .then((response: any) => {
+        return response
+      })
     // .then((response: any) => {
     //     console.log(response);
     //     localStorage.setItem('username', response.username);
@@ -36,4 +39,4 @@ export const logout = (logout: LogoutRequest): any => {
     .catch((error) => {
         console.log(error);
     })
-} 
+}

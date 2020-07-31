@@ -4,7 +4,7 @@ const username = localStorage.getItem('username');
 
 const initialState: AuthState = username? {loggingIn: true, username} : {loggingIn: false, username: ''};
 
-export function auth(state = initialState, action: UserActionTypes): AuthState {
+export function auth(state: AuthState = initialState, action: UserActionTypes): AuthState {
     switch (action.type) {
         case userConstants.LOGIN_REQUEST:
             return { loggingIn: true, username: action.payload.username };
