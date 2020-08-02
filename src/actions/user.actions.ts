@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux';
 import { loginAsync } from '../services/user.service';
+import {clearAlert, errorAlert, successAlert} from './alert.action';
 
 export const userConstants = {
     REGISTER_REQUEST: 'USERS_REGISTER_REQUEST',
@@ -18,7 +19,7 @@ export const userConstants = {
 
     DELETE_REQUEST: 'USERS_DELETE_REQUEST',
     DELETE_SUCCESS: 'USERS_DELETE_SUCCESS',
-    DELETE_FAILURE: 'USERS_DELETE_FAILURE'    
+    DELETE_FAILURE: 'USERS_DELETE_FAILURE'
 };
 
 export interface RegisterState {
@@ -86,9 +87,8 @@ export function loginFail(user: User): LoginFailedAction {
     };
 }
 
-
 // dispatch action
-export function login(dispatch: Dispatch<UserActionTypes>, req: LoginRequest): any {
+export function login(dispatch: Dispatch<any>, req: LoginRequest): any {
     dispatch(loginRequest({ username: req.username }));
     console.log(req)
     return loginAsync(req).then(
@@ -97,12 +97,20 @@ export function login(dispatch: Dispatch<UserActionTypes>, req: LoginRequest): a
             localStorage.setItem('username', response.data.username);
             localStorage.setItem('authenticationToken', response.data.authenticationToken);
             localStorage.setItem('refreshToken', response.data.refreshToken);
-             dispatch(loginSuccess({ username: response.data.username }))
-
+            localStorage.setItem('expiresAt', response.data.expiresAt);
+            dispatch(loginSuccess({ username: response.data.username }));
+            dispatch(successAlert('Login Success'));
+            setTimeout(() => {
+              dispatch(clearAlert(''))
+            }, 3000)
         },
         (error: any) => {
-            console.log(error)
-            dispatch(loginFail({username: JSON.stringify(error)}));
+          console.log(error.message);
+          dispatch(errorAlert(error.message));
+          dispatch(loginFail({username: JSON.stringify(error)}));
+          setTimeout(() => {
+            dispatch(clearAlert(''))
+          }, 3000)
         });
 }
 
@@ -113,10 +121,10 @@ export function Signup(signupReq: SignUpRequest): RegisterAction {
         payload: signupReq
     };
 }
- 
 
 
-export interface LogoutRequest { 
+
+export interface LogoutRequest {
     refreshToken: string;
     username: string;
 }

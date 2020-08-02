@@ -4,7 +4,6 @@ import { loginBtnStyle } from '../../components/LoginButton/LoginButton';
 import { useDispatch } from 'react-redux';
 import { login } from '../../actions/user.actions';
 
-
 const Login: React.FC = () => {
     const [inputs, setForm] = useState({
         username: '',
@@ -26,6 +25,7 @@ const Login: React.FC = () => {
         e.preventDefault();
 
         setSubmitted(true);
+        console.log(submitted)
         if (username && password) {
             login(dispatch, { username, password });
         }
@@ -43,17 +43,19 @@ const Login: React.FC = () => {
                                 <div className="form-group row">
                                     <label htmlFor="user_name" className="col-md-4 col-form-label text-md-right">Username</label>
                                     <div className="col-md-6">
-                                        <input type="text" name="username" value={username} onChange={handleChange} className="form-control" />
+                                        <input type="text" name="username" value={username} onChange={handleChange}
+                                               className={'form-control' + (submitted && !username ? ' is-invalid' : '')}  />
                                     </div>
-                                    {submitted && !username && <div className="invalid-feedback">Username is required</div>}
+                                    {submitted && !username && <span className="text-danger">Username is required</span>}
                                 </div>
 
                                 <div className="form-group row">
                                     <label htmlFor="password" className="col-md-4 col-form-label text-md-right">Password</label>
                                     <div className="col-md-6">
-                                        <input type="password" id="password" className="form-control" name="password" value={password} onChange={handleChange} required></input>
+                                        <input type="password" id="password" name="password" value={password} onChange={handleChange}
+                                               className={'form-control' + (submitted && !password ? ' is-invalid' : '')} required/>
                                     </div>
-                                    {submitted && !password && <div className="invalid-feedback">Password is required</div>}
+                                    {submitted && !password && <span className="text-danger">Password is required</span>}
                                 </div>
 
                                 <span className="col-md-6 offset-md-4">

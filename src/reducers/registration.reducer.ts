@@ -2,7 +2,7 @@ import { UserActionTypes, RegisterState, userConstants } from "../actions/user.a
 
 const initialState: RegisterState = {registering: false};
 
-export function registration(state: RegisterState = initialState, action: UserActionTypes): RegisterState {
+export function registrationReducer(state: RegisterState = initialState, action: UserActionTypes): RegisterState {
     switch (action.type) {
         case userConstants.REGISTER_REQUEST:
             return {registering: true};
