@@ -90,14 +90,13 @@ export function loginFail(user: User): LoginFailedAction {
 // dispatch action
 export function login(dispatch: Dispatch<any>, req: LoginRequest): any {
     dispatch(loginRequest({ username: req.username }));
-    console.log(req)
     return loginAsync(req).then(
         (response: any) => {
             console.log(response);
-            localStorage.setItem('username', response.data.username);
-            localStorage.setItem('authenticationToken', response.data.authenticationToken);
-            localStorage.setItem('refreshToken', response.data.refreshToken);
-            localStorage.setItem('expiresAt', response.data.expiresAt);
+            // localStorage.setItem('username', response.data.username);
+            // localStorage.setItem('authenticationToken', response.data.authenticationToken);
+            // localStorage.setItem('refreshToken', response.data.refreshToken);
+            // localStorage.setItem('expiresAt', response.data.expiresAt);
             dispatch(loginSuccess({ username: response.data.username }));
             dispatch(successAlert('Login Success'));
             setTimeout(() => {
