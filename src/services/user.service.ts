@@ -3,10 +3,11 @@ import { SignUpRequest, LoginRequest, LogoutRequest } from '../actions/user.acti
 
 const base_url = 'http://localhost:8080/api';
 
-export const signup = (signupReq: SignUpRequest): any => {
-    axios.post(`${base_url}/auth/signup`, signupReq)
+export const signupAsync = (signupReq: SignUpRequest): any => {
+    return axios.post(`${base_url}/auth/signup`, signupReq)
     .then((response) => {
         console.log(response);
+        return response;
     })
     .catch((error) => {
         console.log(error);
@@ -23,15 +24,22 @@ axios.interceptors.request.use(function (config: AxiosRequestConfig) {
   return Promise.reject(error)
 });
 
+// https://medium.com/swlh/handling-access-and-refresh-tokens-using-axios-interceptors-3970b601a5da
 axios.interceptors.response.use(response => {
   return response;
-}, (error: AxiosError) => {
+}, (error: any) => {
   const originalRequest = error.config;
   console.log(error.response);
+  if (error.response?.status === 403 && !originalRequest._retry) {
+    originalRequest._retry = true;
+    refreshToken().then(res => {
+        return axios(originalRequest);
+      }
+    )
+  }
 
   return Promise.reject(error);
 });
-
 
 export const loginAsync = (loginReq: LoginRequest): any => {
     return axios.post(`${base_url}/auth/login`, loginReq)
@@ -44,12 +52,12 @@ export const loginAsync = (loginReq: LoginRequest): any => {
       })
 };
 
-export function refreshToken() {
+export function refreshToken(): Promise<any> {
   const refreshTokenPayload = {
     refreshToken: getJwtToken(),
     username: getUsername(),
   };
-  axios.post(`${base_url}/auth/refresh/token`, refreshTokenPayload)
+  return axios.post(`${base_url}/auth/refresh/token`, refreshTokenPayload)
     .then((response) => {
       localStorage.setItem('authenticationToken', response.data.authenticationToken);
       localStorage.setItem('expiresAt', response.data.expiresAt);

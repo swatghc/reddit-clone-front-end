@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 interface Props {
     
 }
-const style: CSS.Properties = {
+export const signUpBtnStyle: CSS.Properties = {
     backgroundColor: '#0079D3',
     borderColor: '#0079D3',
     color: 'aliceblue',
@@ -27,7 +27,7 @@ const style: CSS.Properties = {
 const SignUpButton = (props: Props) => {
     return (
         <Link to="/signup">
-            <button style={style} type="button">SIGN UP</button>
+            <button style={signUpBtnStyle} type="button">SIGN UP</button>
         </Link>
     )
 }

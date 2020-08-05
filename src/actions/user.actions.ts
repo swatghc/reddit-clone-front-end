@@ -24,6 +24,7 @@ export const userConstants = {
 
 export interface RegisterState {
     registering?: boolean;
+    success?: boolean;
 }
 
 export interface AuthState {
@@ -51,17 +52,13 @@ interface LoginFailedAction {
     payload: User;
 }
 
-interface RegisterAction {
-    type: typeof userConstants.REGISTER_REQUEST;
-    payload: LoginRequest;
-}
 
 interface LogoutAction {
     type: typeof userConstants.LOGIN_REQUEST;
     payload: LogoutRequest;
 }
 
-export type UserActionTypes = LoginRequestAction | LoginSuccessAction | LoginFailedAction | RegisterAction | LogoutAction;
+export type UserActionTypes = LoginRequestAction | LoginSuccessAction | LoginFailedAction | LogoutAction;
 
 // action creator
 export function loginRequest(user: User): LoginRequestAction {
@@ -93,10 +90,6 @@ export function login(dispatch: Dispatch<any>, req: LoginRequest): any {
     return loginAsync(req).then(
         (response: any) => {
             console.log(response);
-            // localStorage.setItem('username', response.data.username);
-            // localStorage.setItem('authenticationToken', response.data.authenticationToken);
-            // localStorage.setItem('refreshToken', response.data.refreshToken);
-            // localStorage.setItem('expiresAt', response.data.expiresAt);
             dispatch(loginSuccess({ username: response.data.username }));
             dispatch(successAlert('Login Success'));
             setTimeout(() => {
@@ -113,21 +106,10 @@ export function login(dispatch: Dispatch<any>, req: LoginRequest): any {
         });
 }
 
-
-export function Signup(signupReq: SignUpRequest): RegisterAction {
-    return {
-        type: userConstants.REGISTER_REQUEST,
-        payload: signupReq
-    };
-}
-
-
-
 export interface LogoutRequest {
     refreshToken: string;
     username: string;
 }
-
 
 export interface LoginRequest {
     username: string;
