@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './reducers/root.reducer';
 import { getJwtToken, getUsername } from './services/user.service';
 import {renewToken} from './actions/user.actions';
+import Home from './containers/home/Home';
+import ProtectedRoute from './containers/ProtectedRoute';
 
 
 function App() {
@@ -31,9 +33,11 @@ function App() {
             {alert.message && <div className={`alert ${alert.type}`}>{alert.message}</div>}
           </div>
         </div>
+        <ProtectedRoute/>
+        <Route path="/home" component={Home} />
+        {!authState.authenticated &&  <Route path="/signup" component={SignUp} />}
 
-        <Route path="/signup" component={SignUp} />
-        <Route path="/login" component={Login} />
+        {!authState.authenticated && <Route path="/login" component={Login} />}
       </Router>
 
       {/* <header className="App-header">
