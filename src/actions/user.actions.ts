@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import {loginAsync, getJwtToken, getUsername, refreshToken} from '../services/user.service';
+import {loginAsync, getJwtToken, getUsername, refreshToken, getRefreshToken} from '../services/user.service';
 import {clearAlert, errorAlert, successAlert} from './alert.action';
 
 export const userConstants = {
@@ -78,7 +78,7 @@ interface LogoutAction {
     payload: LogoutRequest;
 }
 
-export type UserActionTypes = LoginRequestAction | LoginSuccessAction | LoginFailedAction | RenewTokenRequest
+export type UserActionTypes = LoginRequestAction | LoginSuccessAction | LoginFailedAction | RenewRequestAction
   | RenewSuccessAction | RenewFailedAction | LogoutAction;
 
 // action creator
@@ -156,7 +156,7 @@ export function login(dispatch: Dispatch<any>, req: LoginRequest): any {
 // dispatch renew token function
 export function renewToken(dispatch: Dispatch<any>): any {
     const req: RenewTokenRequest = {
-        refreshToken: getJwtToken() || '',
+        refreshToken: getRefreshToken() || '',
         username: getUsername() || '',
     };
     dispatch(renewRequest(req));
@@ -187,8 +187,8 @@ export interface LoginRequest {
 }
 
 export interface RenewTokenRequest {
-    username?: string;
-    refreshToken?: string;
+    username: string;
+    refreshToken: string;
 }
 
 export interface SignUpRequest {

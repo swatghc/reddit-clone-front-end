@@ -30,10 +30,13 @@ axios.interceptors.response.use(response => {
 }, (error: any) => {
   const originalRequest = error.config;
   console.log(error.response);
-  if (error.response.status === 403 && !originalRequest.url.includes('api/auth/login') && !originalRequest._retry) {
+  if (error.response.status === 403
+    && !originalRequest.url.includes('api/auth/login')
+    && !originalRequest.url.includes('api/auth/refresh/token')
+    && !originalRequest._retry) {
     originalRequest._retry = true;
     const req: RenewTokenRequest = {
-      refreshToken: getJwtToken() || '',
+      refreshToken: getRefreshToken() || '',
       username: getUsername() || '',
     };
 

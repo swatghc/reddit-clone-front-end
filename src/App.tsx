@@ -6,16 +6,19 @@ import SignUp from './containers/sign-up/SignUp';
 import Login from './containers/Login/Login';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './reducers/root.reducer';
-import {getAuthStatus, getJwtToken, getUsername} from './services/user.service';
+import { getJwtToken, getUsername } from './services/user.service';
 import {renewToken} from './actions/user.actions';
 
 
 function App() {
   // The selector is approximately equivalent to the mapStateToProps
   const alert = useSelector((state: RootState) => state.alert);
-  const dispatch = useDispatch();
 
-  if (getJwtToken() && getUsername()) {
+  const authState = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
+  console.log(authState)
+
+  if (getJwtToken() && getUsername() && !authState.loggingIn && !authState.authenticated) {
     renewToken(dispatch);
   }
 
