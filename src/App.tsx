@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { Header } from './header/Header/Header';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
@@ -7,10 +6,18 @@ import SignUp from './containers/sign-up/SignUp';
 import Login from './containers/Login/Login';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './reducers/root.reducer';
+import {getAuthStatus, getJwtToken, getUsername} from './services/user.service';
+import {renewToken} from './actions/user.actions';
+
 
 function App() {
   // The selector is approximately equivalent to the mapStateToProps
   const alert = useSelector((state: RootState) => state.alert);
+  const dispatch = useDispatch();
+
+  if (getJwtToken() && getUsername()) {
+    renewToken(dispatch);
+  }
 
   return (
     <div className="App">

@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { loginAsync } from '../services/user.service';
+import {loginAsync, getJwtToken, getUsername, refreshToken} from '../services/user.service';
 import {clearAlert, errorAlert, successAlert} from './alert.action';
 
 export const userConstants = {
@@ -19,7 +19,11 @@ export const userConstants = {
 
     DELETE_REQUEST: 'USERS_DELETE_REQUEST',
     DELETE_SUCCESS: 'USERS_DELETE_SUCCESS',
-    DELETE_FAILURE: 'USERS_DELETE_FAILURE'
+    DELETE_FAILURE: 'USERS_DELETE_FAILURE',
+
+    RENEW_REQUEST: 'USERS_RENEW_REQUEST',
+    RENEW_SUCCESS: 'USERS_RENEW_SUCCESS',
+    RENEW_FAILURE: 'USERS_RENEW_FAILURE',
 };
 
 export interface RegisterState {
@@ -30,6 +34,7 @@ export interface RegisterState {
 export interface AuthState {
     loggingIn: boolean;
     username: string;
+    authenticated: boolean;
 }
 
 export interface User {
@@ -52,13 +57,29 @@ interface LoginFailedAction {
     payload: User;
 }
 
+interface RenewRequestAction {
+    type: typeof userConstants.RENEW_REQUEST;
+    payload: RenewTokenRequest;
+}
+
+interface RenewSuccessAction {
+    type: typeof userConstants.RENEW_SUCCESS;
+    payload: RenewTokenRequest;
+}
+
+interface RenewFailedAction {
+    type: typeof userConstants.RENEW_FAILURE;
+    payload: RenewTokenRequest;
+}
+
 
 interface LogoutAction {
     type: typeof userConstants.LOGIN_REQUEST;
     payload: LogoutRequest;
 }
 
-export type UserActionTypes = LoginRequestAction | LoginSuccessAction | LoginFailedAction | LogoutAction;
+export type UserActionTypes = LoginRequestAction | LoginSuccessAction | LoginFailedAction | RenewTokenRequest
+  | RenewSuccessAction | RenewFailedAction | LogoutAction;
 
 // action creator
 export function loginRequest(user: User): LoginRequestAction {
@@ -84,6 +105,32 @@ export function loginFail(user: User): LoginFailedAction {
     };
 }
 
+// action creator
+export function renewRequest(req: RenewTokenRequest): RenewRequestAction {
+    return {
+        type: userConstants.RENEW_REQUEST,
+        payload: req
+    };
+}
+
+// action creator
+export function renewSuccess(req: RenewTokenRequest): RenewSuccessAction {
+    return {
+        type: userConstants.RENEW_SUCCESS,
+        payload: req
+    };
+}
+
+// action creator
+export function renewFail(req: RenewTokenRequest): RenewFailedAction {
+    return {
+        type: userConstants.RENEW_FAILURE,
+        payload: req
+    };
+}
+
+
+
 // dispatch action
 export function login(dispatch: Dispatch<any>, req: LoginRequest): any {
     dispatch(loginRequest({ username: req.username }));
@@ -106,6 +153,29 @@ export function login(dispatch: Dispatch<any>, req: LoginRequest): any {
         });
 }
 
+// dispatch renew token function
+export function renewToken(dispatch: Dispatch<any>): any {
+    const req: RenewTokenRequest = {
+        refreshToken: getJwtToken() || '',
+        username: getUsername() || '',
+    };
+    dispatch(renewRequest(req));
+    return refreshToken(req).then(
+      (response: any) => {
+          console.log(response);
+          dispatch(renewSuccess(req));
+      },
+      (error: any) => {
+          console.log(error.message);
+          dispatch(errorAlert(error.message));
+          dispatch(renewFail(req))
+          setTimeout(() => {
+              dispatch(clearAlert(''))
+          }, 3000)
+      }
+    )
+}
+
 export interface LogoutRequest {
     refreshToken: string;
     username: string;
@@ -114,6 +184,11 @@ export interface LogoutRequest {
 export interface LoginRequest {
     username: string;
     password: string;
+}
+
+export interface RenewTokenRequest {
+    username?: string;
+    refreshToken?: string;
 }
 
 export interface SignUpRequest {

@@ -41,7 +41,7 @@ const SignUp: React.FC = () => {
 
 
   return (
-    <div className="row justify-content-center">
+    <div className="row justify-content-center mt-4">
       <div className="col-md-3"></div>
       <div className="col-md-6">
         <div className="card">

@@ -1,5 +1,5 @@
 import axios, {AxiosError, AxiosRequestConfig} from 'axios';
-import { SignUpRequest, LoginRequest, LogoutRequest } from '../actions/user.actions';
+import {SignUpRequest, LoginRequest, LogoutRequest, RenewTokenRequest} from '../actions/user.actions';
 
 const base_url = 'http://localhost:8080/api';
 
@@ -30,14 +30,18 @@ axios.interceptors.response.use(response => {
 }, (error: any) => {
   const originalRequest = error.config;
   console.log(error.response);
-  if (error.response?.status === 403 && !originalRequest._retry) {
+  if (error.response.status === 403 && !originalRequest.url.includes('api/auth/login') && !originalRequest._retry) {
     originalRequest._retry = true;
-    refreshToken().then(res => {
+    const req: RenewTokenRequest = {
+      refreshToken: getJwtToken() || '',
+      username: getUsername() || '',
+    };
+
+    refreshToken(req).then(res => {
         return axios(originalRequest);
       }
     )
   }
-
   return Promise.reject(error);
 });
 
@@ -52,25 +56,28 @@ export const loginAsync = (loginReq: LoginRequest): any => {
       })
 };
 
-export function refreshToken(): Promise<any> {
-  const refreshTokenPayload = {
-    refreshToken: getJwtToken(),
-    username: getUsername(),
-  };
+export function refreshToken(refreshTokenPayload: RenewTokenRequest): Promise<any> {
+  // const refreshTokenPayload = {
+  //   refreshToken: getJwtToken(),
+  //   username: getUsername(),
+  // };
   return axios.post(`${base_url}/auth/refresh/token`, refreshTokenPayload)
     .then((response) => {
       localStorage.setItem('authenticationToken', response.data.authenticationToken);
       localStorage.setItem('expiresAt', response.data.expiresAt);
       return response;
     })
-
 }
 
-function getJwtToken() {
+export function getJwtToken() {
   return localStorage.getItem('authenticationToken');
 }
 
-function getRefreshToken() {
+export function getAuthStatus() {
+  return !!getJwtToken();
+}
+
+export function getRefreshToken() {
   return localStorage.getItem('refreshToken');
 }
 
@@ -78,7 +85,7 @@ function getExpirationTime() {
   return localStorage.getItem('expiresAt');
 }
 
-function getUsername() {
+export function getUsername() {
   return localStorage.getItem('username');
 }
 
