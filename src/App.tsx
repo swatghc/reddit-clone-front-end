@@ -18,7 +18,6 @@ function App() {
 
   const authState = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
-  console.log(authState)
 
   if (getJwtToken() && getUsername() && !authState.loggingIn && !authState.authenticated) {
     renewToken(dispatch);
