@@ -19,9 +19,14 @@ function App() {
   const authState = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
 
-  if (getJwtToken() && getUsername() && !authState.loggingIn && !authState.authenticated) {
-    renewToken(dispatch);
-  }
+  useEffect(() => {
+    if (getJwtToken() && getUsername() && !authState.loggingIn && !authState.authenticated) {
+      renewToken(dispatch);
+    }
+  });
+
+
+
 
   return (
     <div className="App">
