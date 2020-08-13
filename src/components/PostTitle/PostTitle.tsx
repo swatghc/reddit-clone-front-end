@@ -11,7 +11,8 @@ type PostTitleProps = {
   post: any;
 }
 
-const PostTitle: FunctionComponent<PostTitleProps> = ({post}) => {
+const PostTitle: React.FC<PostTitleProps> = (props: PostTitleProps) => {
+  const post = props.post;
   return (
     <div className="row post">
       <div className="col-md-1">

@@ -7,7 +7,8 @@ type VoteButtonProps = {
   post: any
 }
 
-export const VoteButton: FunctionComponent<VoteButtonProps> = ({post}) => {
+export const VoteButton: React.FC<VoteButtonProps> = (props ) => {
+  const post = props.post;
   const upvotePost = () => {};
   const downvotePost = () => {};
 
