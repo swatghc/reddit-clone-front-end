@@ -17,7 +17,7 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div className="reddit-body">
+    <div className="reddit-body mt-4">
       <div className="container">
         <div className="row">
           <hr/>
@@ -33,7 +33,7 @@ const Home: React.FC = () => {
 
           <div className="col-md-3">
             <Sidebar/>
-            <SubredditSideBar subreddits={[]}/>
+            <SubredditSideBar/>
           </div>
         </div>
 

@@ -11,7 +11,7 @@ export const Header = () =>  {
   return (
     <nav className="navbar navbar-light bg-light">
       <a className="navbar-brand" href="#">
-        <img width="30" height="30" loading="lazy" className="d-inline-block align-top"
+        <img width="30" height="30" loading="lazy" className="d-inline-block align-top mr-1"
              src="https://external-preview.redd.it/iDdntscPf-nfWKqzHRGFmhVxZm4hZgaKe5oyFws-yzA.png?auto=webp&s=38648ef0dc2c3fce76d5e1d8639234d8da0152b2"></img>
         Reddit
       </a>
