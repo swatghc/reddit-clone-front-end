@@ -25,8 +25,8 @@ const PostTitle: React.FC<PostTitleProps> = (props: PostTitleProps) => {
             </span>
 
             <span> . Posted by
-              <Link to={`user/${post.userName}`}>
-                <a className="username">{post.userName}</a>
+              <Link to={`user/${post.userName}`} className="username">
+                {post.userName}
               </Link>
             </span>
 
@@ -34,9 +34,7 @@ const PostTitle: React.FC<PostTitleProps> = (props: PostTitleProps) => {
         </span>
         <hr/>
         <div className="post-title">
-          <Link to={post.url}>
-            <a className="postname">{post.postName}</a>
-          </Link>
+          <Link to={post.url} className="postname">{post.postName}</Link>
         </div>
         <div>
           <p className="post-text">{post.description}</p>
