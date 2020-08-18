@@ -1,13 +1,17 @@
 import React from 'react';
 import './SideBar.css';
+import {useHistory} from 'react-router-dom';
 
 type Props = {}
 
 
 const Sidebar: React.FC = ({}: Props) => {
+  const history = useHistory();
   const goToCreatePost = () => {
+    history.push('/create-post')
   };
   const goToCreateSubreddit = () => {
+    history.push('/create-subreddit')
   };
 
   return (

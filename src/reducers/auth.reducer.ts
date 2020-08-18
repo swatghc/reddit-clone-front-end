@@ -10,6 +10,7 @@ export function authReducer(state: AuthState = initialState, action: UserActionT
             return { loggingIn: true, username: action.payload.username, authenticated: false };
 
         case userConstants.LOGIN_SUCCESS:
+            console.log('success')
             return  { loggingIn: true, username: action.payload.username, authenticated: true };
 
         case userConstants.LOGIN_FAILURE:

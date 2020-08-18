@@ -1,14 +1,23 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
-import Home from './home/Home';
+import {Route, Redirect} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {RootState} from '../reducers/root.reducer';
 import {AuthState} from '../actions/user.actions';
 
-const ProtectedRoute: React.FC = () => {
-  const authState: AuthState = useSelector((state: RootState) => state.auth);
+type Props = {
+  component: React.FC,
+  path: string;
+}
 
-  return authState.authenticated ? (<Home/>) : (<Redirect to={{pathname: '/login'}} />);
+const ProtectedRoute: React.FC<Props> = ({component, ...rest}) => {
+  const authState: AuthState = useSelector((state: RootState) => state.auth);
+  const routeComponent = (props: any) => (
+    authState.authenticated
+      ? React.createElement(component, props)
+      : <Redirect to={{pathname: '/login'}}/>
+  );
+  return <Route {...rest} render={routeComponent}/>;
+
 };
 
 export default ProtectedRoute;
