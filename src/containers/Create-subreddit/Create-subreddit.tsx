@@ -38,7 +38,7 @@ const CreateSubReddit: React.FC = () => {
     if (name && description) {
       createSubReddit(dispatch, {name, description}).then(
         (resp) => {
-          history.push('/home');
+          history.push('/list-subreddits');
         }
       )
     }

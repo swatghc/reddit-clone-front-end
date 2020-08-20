@@ -12,6 +12,7 @@ import Home from './containers/home/Home';
 import ProtectedRoute from './containers/ProtectedRoute';
 import CreateSubReddit from './containers/Create-subreddit/Create-subreddit';
 import CreatePost from './containers/Create-post/Create-post';
+import {ListSubreddits} from './containers/List-subreddits/List-subreddits';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
 
   useEffect(() => {
     if (getJwtToken() && getUsername() && !authState.loggingIn && !authState.authenticated) {
+      console.log('renew!')
       renewToken(dispatch);
     }
   });
@@ -40,6 +42,7 @@ function App() {
         <ProtectedRoute path="/home" component={Home}/>
         <ProtectedRoute path="/create-post" component={CreatePost}/>
         <ProtectedRoute path="/create-subreddit" component={CreateSubReddit}/>
+        <ProtectedRoute path='/list-subreddits' component={ListSubreddits} />
 
         <Route path="/signup" component={SignUp}/>
         <Route path="/login" component={Login}/>

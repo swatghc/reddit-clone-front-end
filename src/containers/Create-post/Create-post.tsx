@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './Create-post.css';
 
 const CreatePost: React.FC = () => {
   return (

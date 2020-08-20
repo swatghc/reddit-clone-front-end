@@ -40,7 +40,7 @@ const SubredditSideBar: React.FC = () => {
 
       {displayViewAll &&
       <div className="text-center">
-          <Link to={`/subreddits`}>View All</Link>
+          <Link to={`/list-subreddits`}>View All</Link>
       </div>
       }
     </div>

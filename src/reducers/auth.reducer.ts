@@ -10,7 +10,6 @@ export function authReducer(state: AuthState = initialState, action: UserActionT
             return { loggingIn: true, username: action.payload.username, authenticated: false };
 
         case userConstants.LOGIN_SUCCESS:
-            console.log('success')
             return  { loggingIn: true, username: action.payload.username, authenticated: true };
 
         case userConstants.LOGIN_FAILURE:
@@ -23,7 +22,7 @@ export function authReducer(state: AuthState = initialState, action: UserActionT
             return  { loggingIn: true, username: action.payload.username, authenticated: true };
 
         case userConstants.RENEW_FAILURE:
-            return  { loggingIn: false, username: '', authenticated: false };
+            return  { loggingIn: true, username: '', authenticated: false };
         default:
             return state;
     }

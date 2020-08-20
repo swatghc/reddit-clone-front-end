@@ -26,7 +26,7 @@ export const createSubReddit = (dispatch: Dispatch<any>, subreddit: ISubreddit):
       }, 3000)
       console.log(error);
     });
-}
+};
 
 export interface ISubreddit {
   id?: number;

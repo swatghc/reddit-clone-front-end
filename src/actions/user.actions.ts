@@ -169,6 +169,7 @@ export function renewToken(dispatch: Dispatch<any>): any {
           console.log(error.message);
           dispatch(errorAlert(error.message));
           dispatch(renewFail(req))
+          localStorage.clear();
           setTimeout(() => {
               dispatch(clearAlert(''))
           }, 3000)

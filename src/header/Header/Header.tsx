@@ -5,8 +5,16 @@ import { useSelector } from 'react-redux';
 import {RootState} from '../../reducers/root.reducer';
 import {AuthState} from '../../actions/user.actions';
 
+import {useHistory} from 'react-router-dom';
+
+
 export const Header = () =>  {
   const authState: AuthState = useSelector((state: RootState) => state.auth);
+  const history = useHistory();
+
+  if (authState.authenticated && authState.loggingIn) {
+    history.push('/home');
+  }
 
   return (
     <nav className="navbar navbar-light bg-light">
