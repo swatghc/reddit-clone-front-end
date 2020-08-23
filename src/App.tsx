@@ -11,8 +11,9 @@ import {renewToken} from './actions/user.actions';
 import Home from './containers/home/Home';
 import ProtectedRoute from './containers/ProtectedRoute';
 import CreateSubReddit from './containers/Create-subreddit/Create-subreddit';
-import CreatePost from './containers/Create-post/Create-post';
+import CreatePost from './containers/post/Create-post/Create-post';
 import {ListSubreddits} from './containers/List-subreddits/List-subreddits';
+import {ViewPost} from './containers/post/view-post/view-post';
 
 
 function App() {
@@ -43,6 +44,9 @@ function App() {
         <ProtectedRoute path="/create-post" component={CreatePost}/>
         <ProtectedRoute path="/create-subreddit" component={CreateSubReddit}/>
         <ProtectedRoute path='/list-subreddits' component={ListSubreddits} />
+
+        <ProtectedRoute path='/view-post/:id'  component={ViewPost} />
+
 
         <Route path="/signup" component={SignUp}/>
         <Route path="/login" component={Login}/>

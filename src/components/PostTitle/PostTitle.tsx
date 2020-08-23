@@ -1,7 +1,7 @@
 import React, {FunctionComponent} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faComments} from '@fortawesome/free-solid-svg-icons';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {loginBtnStyle} from '../LoginButton/LoginButton';
 import {VoteButton} from '../../containers/VoteButton/VoteButton';
 import './PostTitle.css';
@@ -13,6 +13,12 @@ type PostTitleProps = {
 
 const PostTitle: React.FC<PostTitleProps> = (props: PostTitleProps) => {
   const post = props.post;
+  const history = useHistory();
+
+  function goToPost(id: any) {
+    history.push(`/view-post/${id}`);
+  }
+
   return (
     <div className="row post">
       <div className="col-md-1">
@@ -48,7 +54,7 @@ const PostTitle: React.FC<PostTitleProps> = (props: PostTitleProps) => {
             Comments({post.commentCount})
           </a>
 
-          <button style={loginBtnStyle}>
+          <button style={loginBtnStyle} onClick={() => goToPost(post.id)}>
             Read Post
           </button>
         </span>

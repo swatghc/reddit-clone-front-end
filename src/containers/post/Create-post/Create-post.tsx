@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './Create-post.css';
 import {useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
-import {createPost} from '../../services/post.service';
+import {createPost} from '../../../services/post.service';
 
 const CreatePost: React.FC = () => {
   const [inputs, setInputs] = useState({
