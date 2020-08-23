@@ -41,9 +41,7 @@ const CreatePost: React.FC = () => {
           history.push('/home');
         }
       )
-
     }
-
   }
 
   return (
