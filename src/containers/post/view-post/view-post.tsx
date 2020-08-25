@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useHistory, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import {createPost, getPostByID} from '../../../services/post.service';
 import {Link} from 'react-router-dom';
 import Sidebar from '../../SideBar/SideBar';
@@ -7,13 +7,11 @@ import SubredditSideBar from '../../Subreddit-side-bar/Subreddit-side-bar';
 import {VoteButton} from '../../VoteButton/VoteButton';
 import './view-post.css';
 import {getCommentsByPostID, postComment} from '../../../services/comments.service';
-import {Simulate} from 'react-dom/test-utils';
 import {useDispatch} from 'react-redux';
 
 export const ViewPost: React.FC = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const fetchData = async () => {
     const data = await getPostByID(id);

@@ -20,6 +20,13 @@ export const getPostByID = (id: string): Promise<any> => {
     });
 };
 
+export const getPostsByUsername = (name: string): Promise<any> => {
+  return axios.get(`${base_url}/posts/by-user/${name}`)
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 export const createPost = (dispatch: Dispatch<any>, post: CreatePostPayload): Promise<any> => {
   return axios.post(`${base_url}/posts/`, post)
     .then((response) => {

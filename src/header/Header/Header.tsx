@@ -4,16 +4,28 @@ import SignUpButton from "../../components/SignUpButton/SignUpButton";
 import { useSelector } from 'react-redux';
 import {RootState} from '../../reducers/root.reducer';
 import {AuthState} from '../../actions/user.actions';
+import { Dropdown } from 'react-bootstrap';
 
 import {useHistory} from 'react-router-dom';
+import './Header.css';
 
 
 export const Header = () =>  {
   const authState: AuthState = useSelector((state: RootState) => state.auth);
   const history = useHistory();
 
+
+
   if (authState.authenticated && authState.loggingIn) {
     history.push('/home');
+  }
+
+  function logout() {
+
+  }
+
+  function goToUserProfile() {
+    history.push(`/user-profile/${authState.username}`);
   }
 
   return (
@@ -28,6 +40,23 @@ export const Header = () =>  {
           <LoginButton></LoginButton>
           <SignUpButton></SignUpButton>
         </div>
+      }
+
+      { authState.authenticated &&
+      <div className="d-flex">
+        <Dropdown>
+            <Dropdown.Toggle id="dropdown-basic">
+                <img className="account-icon" src="https://www.redditstatic.com/avatars/avatar_default_08_D4E815.png"/>
+                  {authState.username}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu className="dropdown-menu">
+                <Dropdown.Item className="dropdown-item" onClick={goToUserProfile}>Profile</Dropdown.Item>
+                <Dropdown.Item className="dropdown-item" onClick={logout}>Logout</Dropdown.Item>
+            </Dropdown.Menu>
+        </Dropdown>
+
+      </div>
       }
 
     </nav>

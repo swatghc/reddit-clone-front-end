@@ -11,6 +11,13 @@ export const getCommentsByPostID = (id: string): Promise<any> => {
     });
 };
 
+export const getCommentsByUserName = (username: string): Promise<any> => {
+  return axios.get(`${base_url}/comments/by-user/${username}`)
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 export const postComment = (dispatch: Dispatch<any>, comment: CommentPayload) => {
   return axios.post(`${base_url}/comments/`, comment)
     .then((response) => {

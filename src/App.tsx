@@ -14,6 +14,7 @@ import CreateSubReddit from './containers/Create-subreddit/Create-subreddit';
 import CreatePost from './containers/post/Create-post/Create-post';
 import {ListSubreddits} from './containers/List-subreddits/List-subreddits';
 import {ViewPost} from './containers/post/view-post/view-post';
+import {UserProfile} from './containers/user-profile/user-profile';
 
 
 function App() {
@@ -46,7 +47,7 @@ function App() {
         <ProtectedRoute path='/list-subreddits' component={ListSubreddits} />
 
         <ProtectedRoute path='/view-post/:id'  component={ViewPost} />
-
+        <ProtectedRoute path='/user-profile/:name'  component={UserProfile} />
 
         <Route path="/signup" component={SignUp}/>
         <Route path="/login" component={Login}/>

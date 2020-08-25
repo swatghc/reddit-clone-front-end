@@ -24,11 +24,8 @@ const Home: React.FC = () => {
           <div className="col-md-9">
             {/*Display Posts*/}
 
-            {posts.map((post: any) => {
-              return (
-                <PostTitle post={post} key={post.id}/>
-              )
-            })}
+            <PostTitle posts={posts}/>
+
           </div>
 
           <div className="col-md-3">
