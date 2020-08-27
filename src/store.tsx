@@ -7,5 +7,5 @@ const loggerMiddleware: Redux.Middleware = createLogger();
 
 export const store = createStore(
     rootReducer,
-    applyMiddleware(loggerMiddleware)
+    // applyMiddleware(loggerMiddleware)
 );

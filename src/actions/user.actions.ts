@@ -166,9 +166,9 @@ export function renewToken(dispatch: Dispatch<any>): any {
           dispatch(renewSuccess(req));
       },
       (error: any) => {
-          console.log(error.message);
-          dispatch(errorAlert(error.message));
-          dispatch(renewFail(req))
+          console.log(error);
+          dispatch(errorAlert('Token Expired!'));
+          dispatch(renewFail(req));
           localStorage.clear();
           setTimeout(() => {
               dispatch(clearAlert(''))
