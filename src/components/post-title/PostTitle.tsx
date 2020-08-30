@@ -1,9 +1,9 @@
-import React, {FunctionComponent} from 'react';
+import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faComments} from '@fortawesome/free-solid-svg-icons';
 import {Link, useHistory} from 'react-router-dom';
-import {loginBtnStyle} from '../LoginButton/LoginButton';
-import {VoteButton} from '../../containers/VoteButton/VoteButton';
+import {loginBtnStyle} from '../buttons/login-button/LoginButton';
+import {VoteButton} from '../buttons/vote-button/VoteButton';
 import './PostTitle.css';
 
 

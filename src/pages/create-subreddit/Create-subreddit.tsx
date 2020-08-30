@@ -37,7 +37,7 @@ const CreateSubReddit: React.FC = () => {
 
     if (name && description) {
       createSubReddit(dispatch, {name, description}).then(
-        (resp) => {
+        () => {
           history.push('/list-subreddits');
         }
       )
@@ -46,7 +46,7 @@ const CreateSubReddit: React.FC = () => {
 
   return (
     <div className="container mt-4">
-      <div className="row">
+      <div className="d-flex justify-content-center">
         <div className="create-subreddit-container">
           <form className="post-form">
             <div className="form-group">

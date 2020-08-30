@@ -1,11 +1,6 @@
 import * as React from "react";
 import * as CSS from 'csstype';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 export const loginBtnStyle: CSS.Properties = {
     backgroundColor: 'transparent',
@@ -33,4 +28,4 @@ export const LoginButton = () => (
         <button style={loginBtnStyle} className="mr-2" type="button">LOGIN</button>
     </Link>
 
-)
+);

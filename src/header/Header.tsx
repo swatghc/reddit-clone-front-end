@@ -1,11 +1,11 @@
 import * as React from "react";
-import { LoginButton } from "../../components/LoginButton/LoginButton";
-import SignUpButton from "../../components/SignUpButton/SignUpButton";
+import { LoginButton } from "../components/buttons/login-button/LoginButton";
+import SignUpButton from "../components/buttons/sign-up-button/SignUpButton";
 import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../reducers/root.reducer';
-import {AuthState, LogoutRequest} from '../../actions/user.actions';
+import {RootState} from '../reducers/root.reducer';
+import {AuthState, LogoutRequest} from '../actions/user.actions';
 import { Dropdown } from 'react-bootstrap';
-import {getRefreshToken, getUsername, logout as logoutReq} from '../../services/user.service';
+import {getRefreshToken, getUsername, logout as logoutReq} from '../services/user.service';
 
 import {useHistory} from 'react-router-dom';
 import './Header.css';
@@ -72,4 +72,4 @@ export const Header = () =>  {
 
     </nav>
   );
-}
+};

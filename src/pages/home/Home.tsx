@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {getAllPosts} from '../../services/post.service';
-import PostTitle from '../../components/PostTitle/PostTitle';
-import Sidebar from '../SideBar/SideBar';
-import SubredditSideBar from '../Subreddit-side-bar/Subreddit-side-bar';
+import PostTitle from '../../components/post-title/PostTitle';
+import Sidebar from '../../components/side-bar/SideBar';
+import SubredditSideBar from '../../components/subreddit-side-bar/Subreddit-side-bar';
 
 
 const Home: React.FC = () => {

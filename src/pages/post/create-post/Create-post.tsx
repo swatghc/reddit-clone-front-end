@@ -37,7 +37,7 @@ const CreatePost: React.FC = () => {
     setSubmitted(true);
     if (postName && description) {
       createPost(dispatch, {postName, subredditName, description, url}).then(
-        (resp) => {
+        () => {
           history.push('/home');
         }
       )
@@ -46,8 +46,7 @@ const CreatePost: React.FC = () => {
 
   return (
     <div className="container mt-4">
-      <div className="row">
-        <hr/>
+      <div className="d-flex flex-row justify-content-center">
         <div className="create-post-container col-md-9">
           <form className="post-form">
             <div className="form-group">

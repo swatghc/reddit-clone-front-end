@@ -22,14 +22,14 @@ export const signUpBtnStyle: CSS.Properties = {
     textTransform: 'uppercase',
     padding: '3px 16px',
     opacity: 1,
-} 
+};
 
-const SignUpButton = (props: Props) => {
+const SignUpButton = () => {
     return (
         <Link to="/signup">
             <button style={signUpBtnStyle} type="button">SIGN UP</button>
         </Link>
     )
-}
+};
 
 export default SignUpButton

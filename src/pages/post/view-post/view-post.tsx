@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
-import {createPost, getPostByID} from '../../../services/post.service';
+import {getPostByID} from '../../../services/post.service';
 import {Link} from 'react-router-dom';
-import Sidebar from '../../SideBar/SideBar';
-import SubredditSideBar from '../../Subreddit-side-bar/Subreddit-side-bar';
-import {VoteButton} from '../../VoteButton/VoteButton';
+import Sidebar from '../../../components/side-bar/SideBar';
+import SubredditSideBar from '../../../components/subreddit-side-bar/Subreddit-side-bar';
+import {VoteButton} from '../../../components/buttons/vote-button/VoteButton';
 import './view-post.css';
 import {getCommentsByPostID, postComment} from '../../../services/comments.service';
 import {useDispatch} from 'react-redux';

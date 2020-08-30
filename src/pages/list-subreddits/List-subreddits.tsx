@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {getAllSubreddits} from '../../services/subreddit.service';
 import {Link} from 'react-router-dom';
-import Sidebar from '../SideBar/SideBar';
+import Sidebar from '../../components/side-bar/SideBar';
 
 export const ListSubreddits: React.FC  = () => {
   const [subreddits, setSubreddits] = useState([]);

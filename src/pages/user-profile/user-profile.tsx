@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useParams} from 'react-router-dom';
-import PostTitle from '../../components/PostTitle/PostTitle';
+import PostTitle from '../../components/post-title/PostTitle';
 import {getPostsByUsername} from '../../services/post.service';
 import {getCommentsByUserName} from '../../services/comments.service';
 

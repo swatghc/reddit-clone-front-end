@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import SignUpButton, {signUpBtnStyle} from '../../components/SignUpButton/SignUpButton'
+import {signUpBtnStyle} from '../../components/buttons/sign-up-button/SignUpButton'
 import {useDispatch, useSelector} from 'react-redux';
 import { register } from '../../actions/register.action';
 import {RootState} from '../../reducers/root.reducer';
 import {RegisterState} from '../../actions/user.actions';
-import { useHistory } from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 
 const SignUp: React.FC = () => {
   const signUpState: RegisterState = useSelector((state: RootState) => state.registration);
@@ -83,7 +83,7 @@ const SignUp: React.FC = () => {
                 <button style={signUpBtnStyle}>
                     SIGN UP
                 </button>
-                <span className="pl-2">Existing user? <a href="/login">Log In</a></span>
+                <span className="pl-2">Existing user? <Link to="/login">Log In</Link></span>
                 </span>
             </form>
           </div>
@@ -92,6 +92,6 @@ const SignUp: React.FC = () => {
       <div className="col-md-3"></div>
     </div>
   )
-}
+};
 
 export default SignUp

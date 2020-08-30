@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronDown, faChevronUp} from '@fortawesome/free-solid-svg-icons';
 import './VoteButton.css';
-import {IVotePayload, vote as voteAPI, VoteType} from '../../services/vote.service';
-import {getPostByID} from '../../services/post.service';
+import {IVotePayload, vote as voteAPI, VoteType} from '../../../services/vote.service';
 import {useDispatch} from 'react-redux';
+import {getPostByID} from '../../../services/post.service';
 
 type VoteButtonProps = {
   post: any

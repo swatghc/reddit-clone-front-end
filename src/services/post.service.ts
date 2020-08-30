@@ -1,6 +1,6 @@
 import axios, {AxiosRequestConfig} from 'axios';
 import {getJwtToken} from './user.service';
-import {CreatePostPayload} from '../containers/post/Create-post/Create-post';
+import {CreatePostPayload} from '../pages/post/create-post/Create-post';
 import {Dispatch} from 'react';
 import {clearAlert, errorAlert, successAlert} from '../actions/alert.action';
 
@@ -33,8 +33,8 @@ export const createPost = (dispatch: Dispatch<any>, post: CreatePostPayload): Pr
       dispatch(successAlert(`Subreddit ${post.postName} successfully created`));
       setTimeout(() => {
         dispatch(clearAlert(''))
-      }, 3000)
-
+      }, 3000);
+      return response;
     })
     .catch((error) => {
       dispatch(errorAlert(error.message));

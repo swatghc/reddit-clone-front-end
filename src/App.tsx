@@ -1,20 +1,20 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import {Header} from './header/Header/Header';
+import {Header} from './header/Header';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import SignUp from './containers/sign-up/SignUp';
-import Login from './containers/Login/Login';
+import SignUp from './pages/sign-up/SignUp';
+import Login from './pages/login/Login';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from './reducers/root.reducer';
 import {getJwtToken, getUsername} from './services/user.service';
 import {renewToken} from './actions/user.actions';
-import Home from './containers/home/Home';
-import ProtectedRoute from './containers/ProtectedRoute';
-import CreateSubReddit from './containers/Create-subreddit/Create-subreddit';
-import CreatePost from './containers/post/Create-post/Create-post';
-import {ListSubreddits} from './containers/List-subreddits/List-subreddits';
-import {ViewPost} from './containers/post/view-post/view-post';
-import {UserProfile} from './containers/user-profile/user-profile';
+import Home from './pages/home/Home';
+import ProtectedRoute from './pages/ProtectedRoute';
+import CreateSubReddit from './pages/create-subreddit/Create-subreddit';
+import CreatePost from './pages/post/create-post/Create-post';
+import {ListSubreddits} from './pages/list-subreddits/List-subreddits';
+import {ViewPost} from './pages/post/view-post/view-post';
+import {UserProfile} from './pages/user-profile/user-profile';
 
 
 function App() {

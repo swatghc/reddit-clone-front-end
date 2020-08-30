@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import {Link, useHistory} from 'react-router-dom';
-import {loginBtnStyle} from '../../components/LoginButton/LoginButton';
+import {loginBtnStyle} from '../../components/buttons/login-button/LoginButton';
 import {useDispatch, useSelector} from 'react-redux';
-import {AuthState, login, renewToken} from '../../actions/user.actions';
+import {AuthState, login} from '../../actions/user.actions';
 import {RootState} from '../../reducers/root.reducer';
 
 const Login: React.FC = () => {
@@ -84,6 +84,6 @@ const Login: React.FC = () => {
       </div>
     </div>
   )
-}
+}；
 
 export default Login
