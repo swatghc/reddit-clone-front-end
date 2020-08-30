@@ -1,5 +1,7 @@
 import axios, {AxiosError, AxiosRequestConfig} from 'axios';
 import {SignUpRequest, LoginRequest, LogoutRequest, RenewTokenRequest} from '../actions/user.actions';
+import {Dispatch} from 'react';
+import {clearAlert, errorAlert, successAlert} from '../actions/alert.action';
 
 const base_url = 'http://localhost:8080/api';
 
@@ -60,10 +62,6 @@ export const loginAsync = (loginReq: LoginRequest): any => {
 };
 
 export function refreshToken(refreshTokenPayload: RenewTokenRequest): Promise<any> {
-  // const refreshTokenPayload = {
-  //   refreshToken: getJwtToken(),
-  //   username: getUsername(),
-  // };
   return axios.post(`${base_url}/auth/refresh/token`, refreshTokenPayload)
     .then((response) => {
       localStorage.setItem('authenticationToken', response.data.authenticationToken);
@@ -92,13 +90,21 @@ export function getUsername() {
   return localStorage.getItem('username');
 }
 
-export const logout = (logout: LogoutRequest): any => {
-    axios.post(`${base_url}/auth/logout`, logout)
+export const logout = (dispatch: Dispatch<any>, logout: LogoutRequest): any => {
+    return axios.post(`${base_url}/auth/logout`, logout)
     .then((response) => {
-        console.log(response);
-        localStorage.clear();
+      console.log(response);
+      dispatch(successAlert(`Logout  success!`));
+      setTimeout(() => {
+        dispatch(clearAlert(''))
+      }, 3000);
+      localStorage.clear();
+      return response;
     })
     .catch((error) => {
-        console.log(error);
-    })
+      console.log(error);
+      dispatch(errorAlert(error.message));
+      setTimeout(() => {
+        dispatch(clearAlert(''))
+      }, 3000)    })
 }

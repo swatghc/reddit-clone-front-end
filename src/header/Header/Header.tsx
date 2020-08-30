@@ -1,10 +1,11 @@
 import * as React from "react";
 import { LoginButton } from "../../components/LoginButton/LoginButton";
 import SignUpButton from "../../components/SignUpButton/SignUpButton";
-import { useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../reducers/root.reducer';
-import {AuthState} from '../../actions/user.actions';
+import {AuthState, LogoutRequest} from '../../actions/user.actions';
 import { Dropdown } from 'react-bootstrap';
+import {getRefreshToken, getUsername, logout as logoutReq} from '../../services/user.service';
 
 import {useHistory} from 'react-router-dom';
 import './Header.css';
@@ -13,14 +14,24 @@ import './Header.css';
 export const Header = () =>  {
   const authState: AuthState = useSelector((state: RootState) => state.auth);
   const history = useHistory();
-
+  const dispatch = useDispatch();
 
 
   if (authState.authenticated && authState.loggingIn) {
     history.push('/home');
   }
 
-  function logout() {
+  async function logout() {
+    const logoutRequest: LogoutRequest = {
+      username: getUsername() || '',
+      refreshToken: getRefreshToken() || '',
+    };
+    if (logoutRequest) {
+      const resp = await logoutReq(dispatch, logoutRequest);
+      if (resp) {
+        window.location.reload();
+      }
+    }
 
   }
 
