@@ -17,9 +17,9 @@ export const Header = () =>  {
   const dispatch = useDispatch();
 
 
-  if (authState.authenticated && authState.loggingIn) {
-    history.push('/home');
-  }
+  // if (authState.authenticated && authState.loggingIn) {
+  //   history.push('/home');
+  // }
 
   async function logout() {
     const logoutRequest: LogoutRequest = {

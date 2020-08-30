@@ -8,7 +8,6 @@ const base_url = 'http://localhost:8080/api';
 export const signupAsync = (signupReq: SignUpRequest): any => {
     return axios.post(`${base_url}/auth/signup`, signupReq)
     .then((response) => {
-        console.log(response);
         return response;
     })
     .catch((error) => {
@@ -93,7 +92,6 @@ export function getUsername() {
 export const logout = (dispatch: Dispatch<any>, logout: LogoutRequest): any => {
     return axios.post(`${base_url}/auth/logout`, logout)
     .then((response) => {
-      console.log(response);
       dispatch(successAlert(`Logout  success!`));
       setTimeout(() => {
         dispatch(clearAlert(''))
@@ -107,4 +105,4 @@ export const logout = (dispatch: Dispatch<any>, logout: LogoutRequest): any => {
       setTimeout(() => {
         dispatch(clearAlert(''))
       }, 3000)    })
-}
+};

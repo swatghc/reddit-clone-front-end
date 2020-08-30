@@ -3,7 +3,6 @@ import {Link, useHistory} from 'react-router-dom';
 import {loginBtnStyle} from '../../components/LoginButton/LoginButton';
 import {useDispatch, useSelector} from 'react-redux';
 import {AuthState, login, renewToken} from '../../actions/user.actions';
-import {getJwtToken, getUsername} from '../../services/user.service';
 import {RootState} from '../../reducers/root.reducer';
 
 const Login: React.FC = () => {
@@ -15,9 +14,11 @@ const Login: React.FC = () => {
 
   const authState: AuthState = useSelector((state: RootState) => state.auth);
 
-  if (authState.authenticated) {
-    history.push('/home')
-  }
+  useEffect(() => {
+    if (authState.authenticated) {
+      history.push('/home')
+    }
+  });
 
   const [submitted, setSubmitted] = useState(false);
 
@@ -66,14 +67,15 @@ const Login: React.FC = () => {
                   {submitted && !password && <span className="text-danger">Password is required</span>}
                 </div>
 
-                <span className="col-md-6 offset-md-4">
-                                    <button style={loginBtnStyle}>
-                                        Login
-                                    </button>
-                                    <span className="pl-2">New to SpringReddit?
-                                        <Link to="/signup">SIGN UP</Link>
-                                    </span>
-                                </span>
+                <div className="d-flex flex-row justify-content-center">
+                  <button style={loginBtnStyle}>
+                    Login
+                  </button>
+                </div>
+
+                <small>New to SpringReddit?
+                  <Link to="/signup">SIGN UP</Link>
+                </small>
               </form>
             </div>
           </div>
