@@ -16,7 +16,7 @@ const Login: React.FC = () => {
 
   useEffect(() => {
     if (authState.authenticated) {
-      history.push('/home')
+      history.push('/')
     }
   });
 

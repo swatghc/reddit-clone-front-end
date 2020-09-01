@@ -10,20 +10,27 @@ export const getAllSubreddits = (): Promise<any> => {
     });
 };
 
+export const getSubredditByID = (id: string): Promise<any> => {
+  return axios.get(`${base_url}/subreddit/${id}`)
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 export const createSubReddit = (dispatch: Dispatch<any>, subreddit: ISubreddit): Promise<any> => {
   return axios.post(`${base_url}/subreddit/`, subreddit)
     .then((response) => {
       dispatch(successAlert(`Subreddit ${subreddit.name} successfully created`));
       setTimeout(() => {
         dispatch(clearAlert(''))
-      }, 3000)
+      }, 3000);
 
     })
     .catch((error) => {
       dispatch(errorAlert(error.message));
       setTimeout(() => {
         dispatch(clearAlert(''))
-      }, 3000)
+      }, 3000);
       console.log(error);
     });
 };

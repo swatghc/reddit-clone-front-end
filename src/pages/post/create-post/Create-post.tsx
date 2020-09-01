@@ -38,7 +38,7 @@ const CreatePost: React.FC = () => {
     if (postName && description) {
       createPost(dispatch, {postName, subredditName, description, url}).then(
         () => {
-          history.push('/home');
+          history.push('/');
         }
       )
     }

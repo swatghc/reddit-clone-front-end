@@ -15,6 +15,8 @@ import CreatePost from './pages/post/create-post/Create-post';
 import {ListSubreddits} from './pages/list-subreddits/List-subreddits';
 import {ViewPost} from './pages/post/view-post/view-post';
 import {UserProfile} from './pages/user-profile/user-profile';
+import Switch from 'react-bootstrap/Switch';
+import {Subreddit} from './pages/subreddit/subreddit';
 
 
 function App() {
@@ -40,17 +42,20 @@ function App() {
           </div>
         </div>
 
-        <ProtectedRoute path="/home" component={Home}/>
-        <ProtectedRoute path="/create-post" component={CreatePost}/>
-        <ProtectedRoute path="/create-subreddit" component={CreateSubReddit}/>
-        <ProtectedRoute path='/list-subreddits' component={ListSubreddits} />
+        <Switch>
+          <Route path="/" component={Home} exact/>
 
-        <ProtectedRoute path='/view-post/:id'  component={ViewPost} />
-        <ProtectedRoute path='/user-profile/:name'  component={UserProfile} />
+          <ProtectedRoute path="/create-post" component={CreatePost}/>
+          <ProtectedRoute path="/create-subreddit" component={CreateSubReddit}/>
+          <ProtectedRoute path='/list-subreddits' component={ListSubreddits} />
+          <ProtectedRoute path='/view-subreddit/:id' component={Subreddit} />
 
-        <Route path="/signup" component={SignUp}/>
-        <Route path="/login" component={Login}/>
+          <ProtectedRoute path='/view-post/:id'  component={ViewPost} />
+          <ProtectedRoute path='/user-profile/:name'  component={UserProfile} />
 
+          <Route path="/signup" component={SignUp}/>
+          <Route path="/login" component={Login}/>
+        </Switch>
       </Router>
     </div>
   );
