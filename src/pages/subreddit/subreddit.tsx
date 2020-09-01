@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {getSubredditByID} from '../../services/subreddit.service';
+import {getSubredditByID, ISubreddit} from '../../services/subreddit.service';
 import {useParams} from 'react-router-dom';
 
 export const Subreddit: React.FC = () => {
-  const [subreddit, setSubreddit] = useState<Subreddit>({
+  const [subreddit, setSubreddit] = useState<ISubreddit>({
     name: '',
     description: '',
     numberOfPosts: 0
@@ -41,9 +41,3 @@ export const Subreddit: React.FC = () => {
     </div>
   );
 };
-
-export type Subreddit = {
-  name: string;
-  description: string;
-  numberOfPosts: number;
-}

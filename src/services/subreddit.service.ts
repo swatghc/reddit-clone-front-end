@@ -39,5 +39,5 @@ export interface ISubreddit {
   id?: number;
   name: string;
   description: string;
-  postCount?: number;
+  numberOfPosts?: number;
 }
