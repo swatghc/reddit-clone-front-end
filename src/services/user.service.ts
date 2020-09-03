@@ -1,4 +1,4 @@
-import axios, {AxiosError, AxiosRequestConfig} from 'axios';
+import axios, {AxiosRequestConfig} from 'axios';
 import {SignUpRequest, LoginRequest, LogoutRequest, RenewTokenRequest} from '../actions/user.actions';
 import {Dispatch} from 'react';
 import {clearAlert, errorAlert, successAlert} from '../actions/alert.action';

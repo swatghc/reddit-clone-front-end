@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import {loginAsync, getJwtToken, getUsername, refreshToken, getRefreshToken} from '../services/user.service';
+import {loginAsync, getUsername, refreshToken, getRefreshToken} from '../services/user.service';
 import {clearAlert, errorAlert, successAlert} from './alert.action';
 
 export const userConstants = {
