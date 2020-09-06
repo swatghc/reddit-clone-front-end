@@ -53,7 +53,11 @@
   "devDependencies": {
     "@types/react-router-dom": "^5.1.5",
     "@types/redux-logger": "^3.0.8",
+    "awesome-typescript-loader": "^5.2.1",
+    "css-loader": "^4.2.2",
+    "source-map-loader": "^1.1.0",
     "typescript": "^3.9.7",
-    "webpack": "4.42.0"
+    "webpack": "4.42.0",
+    "webpack-cli": "^3.3.12"
   }
 }
